@@ -14,10 +14,27 @@ class SetViewController: UIViewController {
         didSet {
             dealButton.titleLabel?.font = UIFont(name: "Deal 3 More", size: 55.0)
             dealButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            dealButton.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             dealButton.layer.borderWidth = 5
             dealButton.layer.cornerRadius = 0.15 * dealButton.bounds.height
         }
     }
+    @IBOutlet weak var setScoreLabel: UILabel! {
+        didSet {
+            setScoreLabel.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            setScoreLabel.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            setScoreLabel.layer.borderWidth = 5
+            setScoreLabel.layer.cornerRadius = 0.15 * setScoreLabel.bounds.height
+        }
+    }
+    
+    private var currentSets: Int = 0 {
+        didSet {
+            setScoreLabel.text = "\(currentSets / 3) Sets"
+        }
+    }
+    
+    
     @IBOutlet weak var boardView: BoardView! {
         didSet {
             boardView.backgroundColor = #colorLiteral(red: 0.7090377371, green: 0.7542965646, blue: 1, alpha: 1)
@@ -41,6 +58,7 @@ class SetViewController: UIViewController {
 
     private func updateCardViewsFromModel() {
         setDealMore()
+        currentSets = setGame.matchedCards.count
         if boardView.cardViews.count - setGame.cardsOnTable.count > 0 {
             let cardViews = boardView.cardViews [..<setGame.cardsOnTable.count]
             boardView.cardViews = Array(cardViews)

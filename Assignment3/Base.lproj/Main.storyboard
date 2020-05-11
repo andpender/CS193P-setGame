@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Set View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="SetViewController" customModule="Assignment3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mNQ-ro-U0z" customClass="BoardView" customModule="Assignment3" customModuleProvider="target">
+                                <rect key="frame" x="20" y="44" width="374" height="748"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sI9-Yy-opS">
+                                <rect key="frame" x="126" y="817" width="162" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Deal 3 More">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchDeal" destination="BYZ-38-t0r" eventType="touchUpInside" id="019-yT-wuW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sI9-Yy-opS" secondAttribute="bottom" constant="10" id="098-x8-MJg"/>
+                            <constraint firstItem="mNQ-ro-U0z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="6mz-X5-Utd"/>
+                            <constraint firstItem="mNQ-ro-U0z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Tlp-Cv-zPy"/>
+                            <constraint firstItem="sI9-Yy-opS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="126" id="eOQ-Id-znt"/>
+                            <constraint firstItem="sI9-Yy-opS" firstAttribute="centerX" secondItem="mNQ-ro-U0z" secondAttribute="centerX" id="gMi-Ug-8sT"/>
+                            <constraint firstItem="sI9-Yy-opS" firstAttribute="top" secondItem="mNQ-ro-U0z" secondAttribute="bottom" constant="25" id="mKM-qw-dED"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mNQ-ro-U0z" secondAttribute="trailing" constant="20" id="xxn-i0-J8A"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="boardView" destination="mNQ-ro-U0z" id="zii-gl-kpv"/>
+                        <outlet property="dealButton" destination="sI9-Yy-opS" id="Gbf-VZ-5zA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="86.383928571428569"/>
+        </scene>
+    </scenes>
+</document>

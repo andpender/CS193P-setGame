@@ -13,7 +13,7 @@ class BoardView: UIView {
     /// Property that holds all of the different card views
     var cardViews = [CardView]() {
         willSet { removeSubviews();}
-        didSet { addSubviews(); setNeedsLayout() }
+        didSet { addSubviews(); setNeedsLayout(); }
     }
 
     private func removeSubviews() {

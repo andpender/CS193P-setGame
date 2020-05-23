@@ -27,14 +27,14 @@ class SetViewController: UIViewController {
             setScoreLabel.layer.cornerRadius = 0.15 * setScoreLabel.bounds.height
         }
     }
-    
+
     private var currentSets: Int = 0 {
         didSet {
             setScoreLabel.text = "\(currentSets / 3) Sets"
         }
     }
-    
-    
+
+
     @IBOutlet weak var boardView: BoardView! {
         didSet {
             boardView.backgroundColor = #colorLiteral(red: 0.7090377371, green: 0.7542965646, blue: 1, alpha: 1)
@@ -68,14 +68,27 @@ class SetViewController: UIViewController {
 
         for index in setGame.cardsOnTable.indices {
             let card = setGame.cardsOnTable[index]
+
             if index > (numberCardViews - 1) {
                 let cardView = CardView()
                 updateCardView(cardView, for: card)
                 addTapViewGestureRecognizer(for: cardView)
+
+                // Prepare cardview for incoming transition
+                cardView.frame = dealButton.frame
                 boardView.cardViews.append(cardView)
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.6, delay: 0.0, options: [], animations: {
+                        self.boardView.layoutIfNeeded()
+                    })
             } else {
-                let cardView = boardView.cardViews[index]
-                updateCardView(cardView, for: card)
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.6, delay: 0.0, options: [], animations: {
+                        if self.setGame.matchedCards.contains(card) {
+                            self.boardView.cardViews[index].alpha = 0
+                        }
+                    }, completion: { finished in
+                        let cardView = self.boardView.cardViews[index]
+                        self.updateCardView(cardView, for: card)
+                    })
             }
         }
     }
@@ -92,8 +105,19 @@ class SetViewController: UIViewController {
         cardView.colorInt = card.color.rawValue
         cardView.symbolInt = card.shape.rawValue
         cardView.number = card.number.rawValue
-        
+
         cardView.layer.borderColor = setGame.selectedCards.contains(card) ? #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1): #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    }
+    
+    // Disables deal more if more than 21 cards are on table
+    private func setDealMore() {
+        if setGame.cardsOnTable.count <= 81 || setGame.selectedCards.count == 3 {
+            dealButton.isEnabled = true
+            dealButton.isHidden = false
+        } else {
+            dealButton.isEnabled = false
+            dealButton.isHidden = true
+        }
     }
 
     // MARK: Gestures
@@ -147,19 +171,6 @@ class SetViewController: UIViewController {
             updateCardViewsFromModel()
         default:
             break
-        }
-    }
-
-
-
-    // Disables deal more if more than 21 cards are on table
-    private func setDealMore() {
-        if setGame.cardsOnTable.count <= 81 || setGame.selectedCards.count == 3 {
-            dealButton.isEnabled = true
-            dealButton.isHidden = false
-        } else {
-            dealButton.isEnabled = false
-            dealButton.isHidden = true
         }
     }
 }

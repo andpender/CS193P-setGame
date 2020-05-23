@@ -13,7 +13,7 @@ class SetGame {
     private(set) var cardsOnTable = [Card]()
     private(set) var matchedCards = [Card]()
     private(set) var selectedCards = [Card]()
-    
+
 
 
     init() {
@@ -48,17 +48,17 @@ class SetGame {
 
     func matchCards() {
         if selectedCards.count == 3 {
-            if selectedCards.isValidAttribute({ $0.color == $1.color }) &&
-                selectedCards.isValidAttribute({ $0.shape == $1.shape }) &&
-                selectedCards.isValidAttribute({ $0.number == $1.number }) &&
-                selectedCards.isValidAttribute({ $0.fill == $1.fill }) {
-                matchedCards.append(contentsOf: selectedCards)
-                cardsOnTable = cardsOnTable.filter { !selectedCards.contains($0) }
-            }
+//            if selectedCards.isValidAttribute({ $0.color == $1.color }) &&
+//                selectedCards.isValidAttribute({ $0.shape == $1.shape }) &&
+//                selectedCards.isValidAttribute({ $0.number == $1.number }) &&
+//                selectedCards.isValidAttribute({ $0.fill == $1.fill }) {
+            matchedCards.append(contentsOf: selectedCards)
+            cardsOnTable = cardsOnTable.filter { !selectedCards.contains($0) }
+//            }
         }
         selectedCards.removeAll()
     }
-    
+
     func shuffle() {
         cardsOnTable.shuffle()
     }
